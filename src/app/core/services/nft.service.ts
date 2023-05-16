@@ -34,7 +34,6 @@ export class NftService {
     }
     try {
       const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
-      console.log(accounts);
       return accounts[0];
     } catch (error) {
       console.error("User rejected the request.");
@@ -46,7 +45,8 @@ export class NftService {
       const result = await this.contract.methods
         .delegatedMint(signature, account, id, amount, data)
         .send({ from: account });
-      return await lastValueFrom(this.setNft({public_id: publicId, tx: result.transactionHash}));
+      return { contractAddress: this.contractAddress, id, publicId, tx: result.transactionHash };
+      // return await lastValueFrom(this.setNft({public_id: publicId, tx: result.transactionHash}));
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +69,7 @@ export class NftService {
     return this.http.get('./assets/data/NFTContractABI.json');
   }
 
-  private setNft(data: ISetNftPayload): Observable<any> {
+  setNft(data: ISetNftPayload): Observable<any> {
     return this.http.post(`${this.apiUrl}/nft-minted`, data);
   }
 }

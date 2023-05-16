@@ -61,7 +61,6 @@ export class WalletService {
         map(keychain => {
           const mnemonic = this.getMnemonic(keychain, password);
           this.signTransaction(mnemonic);
-          console.log(this.transaction.toXDR('base64'));
           return this.transaction.toXDR('base64');
         }),
       );

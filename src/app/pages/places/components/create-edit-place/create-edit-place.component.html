@@ -209,6 +209,14 @@
                 </span>
               </div>
             </div>
+            <ng-container *ngIf="isNftMinted && nftData.id">
+              <div class="field col-12 flex align-items-center mb-0 pb-1">
+                <span class="font-bold pr-2">Contract:</span> <span>{{nftData.contractAddress}}</span>
+              </div>
+              <div class="field col-12 flex align-items-center pt-1">
+                <span class="font-bold pr-2">NFTId:</span> <span>{{nftData.id}}</span>
+              </div>
+            </ng-container>
           </div>
         </div>
       </form>

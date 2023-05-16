@@ -81,6 +81,11 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
       value: 'okx'
     }
   ];
+  nftData = {
+    id: 0,
+    contractAddress: '',
+  }
+
   account;
 
   constructor(
@@ -156,7 +161,6 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     if (this.memoForm.invalid || ((!this.selectedPhoto || !this.selectedVideo) && !this.editMode)) {
       this.memoForm.markAllAsTouched();
       return;
@@ -224,8 +228,13 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
       recipient_address: this.account,
     }
 
-    await this.nftService.mintNFT(data);
-    this.isMinting = false;
+    const result = await this.nftService.mintNFT(data);
+    this.nftService.setNft({public_id: result.publicId, tx: result.tx}).subscribe(() => {
+      this.nftData.id = result.id;
+      this.nftData.contractAddress = result.contractAddress;
+      this.isNftMinted = true;
+      this.isMinting = false;
+    })
   }
 
   private initForm(): void {
