@@ -1,0 +1,26 @@
+<div class="layout-topbar">
+  <div class="flex align-items-center justify-content-between w-full">
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="assets/layout/images/logo.svg" alt="logo">
+    </a>
+    <div *ngIf="authService.isLoggedIn | async"
+          class="flex align-items-center">
+      <div class="text-sm">
+        GBM / USD
+        <span class="c-balance-holder">
+          {{(this.authService.walletData$ | async)?.balance?.gbm}} /
+          {{(this.authService.walletData$ | async)?.balance?.usd}}
+        </span>
+      </div>
+      <p-button styleClass="p-button-text p-button-secondary"
+                (onClick)="logout()"
+                label="Logout">
+      </p-button>
+    </div>
+
+<!--    <div #topbarmenu class="layout-topbar-menu"-->
+<!--         [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">-->
+<!--      Logout-->
+<!--    </div>-->
+  </div>
+</div>

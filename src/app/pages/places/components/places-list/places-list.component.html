@@ -1,0 +1,30 @@
+<p-table [value]="places"
+         [tableStyle]="{'min-width': '50rem'}"
+         [loading]="isLoading"
+         [showLoader]="true"
+         [lazy]="true"
+         [totalRecords]="totalRecords"
+         styleClass="p-datatable-striped">
+  <ng-template pTemplate="header">
+    <tr class="text-xs">
+      <th>NAME</th>
+      <th>CREATED BY</th>
+      <th>PLACE ID</th>
+      <th>DATE CREATED</th>
+      <th>OPTIONS</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-place>
+    <tr>
+      <td>{{ place.name }}</td>
+      <td>{{ place.createdBy }}</td>
+      <td>{{ place.public_id }}</td>
+      <td>{{ place.createdDate }}</td>
+      <td>
+        <i class="pi pi-info-circle mr-3" (click)="onView(place.public_id)"></i>
+        <i class="pi pi-pencil mr-3" (click)="onEdit(place.public_id)"></i>
+        <i class="pi pi-trash p-error" (click)="onDelete(place.public_id)"></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

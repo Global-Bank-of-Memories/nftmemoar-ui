@@ -1,0 +1,55 @@
+<div class="c-main-container surface-ground flex align-items-center justify-content-center overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div class="c-login-container surface-card py-4 px-4 sm:px-4">
+      <ng-container *ngIf="!isPreliminaryValid">
+        <div class="text-center mb-5">
+          <div class="text-900 text-2xl font-medium mb-3">Login to your account</div>
+        </div>
+        <form [formGroup]="loginForm">
+          <div class="field p-fluid">
+            <label for="email1"
+                   class="block text-900 text-sm font-bold mb-2">Email</label>
+            <input id="email1"
+                   type="text"
+                   placeholder="Email address"
+                   pInputText
+                   class="w-full"
+                   formControlName="email">
+            <small *ngIf="this.loginForm.get('email')?.touched && this.loginForm.get('email')?.invalid"
+                   class="p-error">
+              This field is required
+            </small>
+          </div>
+          <div class="field p-fluid">
+            <label for="password1" class="block text-900 text-sm font-bold mb-2">Password</label>
+            <p-password id="password1" placeholder="Password"
+                        [toggleMask]="true"
+                        [feedback]="false"
+                        inputStyleClass="w-full"
+                        formControlName="password"></p-password>
+            <small *ngIf="this.loginForm.get('password')?.touched && this.loginForm.get('password')?.invalid"
+                   class="p-error">
+              This field is required
+            </small>
+          </div>
+          <button pButton
+                  pRipple
+                  label="Login"
+                  class="w-full p-3 text-sm"
+                  (click)="onLogin()"></button>
+        </form>
+      </ng-container>
+      <ng-container *ngIf="isPreliminaryValid">
+        <div class="flex align-items-center justify-content-center flex-column">
+          <div class="text-900 text-lg font-bold mb-3 text-center">Confirmation code has been sent to your e-mail</div>
+          <div class="text-900 mb-2">
+            This code will expire in: <span class="text-900 font-bold">{{timeLeft}}</span>
+          </div>
+          <ng-otp-input #otpInput  [formCtrl]="otpFormControl"  [config]="{ length: 4, allowNumbersOnly: true }">
+          </ng-otp-input>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+</div>

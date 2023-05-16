@@ -1,0 +1,221 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="flex align-items-center justify-content-between mb-3">
+        <div>
+          <p-button icon="pi pi-arrow-left"
+                    styleClass="p-button-rounded p-button-secondary p-button-text"
+                    [routerLink]="dashboardPath"></p-button>
+        </div>
+        <div>
+          <p-button styleClass="p-button-rounded p-button-secondary p-button-text"
+                    label="Okx"
+                    (onClick)="connectWallet()">
+          </p-button>
+        </div>
+      </div>
+      <h5 class="text-center">
+       {{editMode ? titleEdit : titleCreate}}
+      </h5>
+      <form [formGroup]="memoForm">
+        <div class="c-form-holder p-fluid p-formgrid grid text-sm">
+          <div class="col-12 md:col-6">
+            <div class="col-12">
+              <div class="font-bold mb-2 text-900">
+                Your balance
+              </div>
+              <div>
+                <span>GBM / USD</span>
+                <span class="c-price-holder font-bold ml-2">
+                  {{(authService.walletData$ | async)?.balance?.gbm}} /
+                  {{(authService.walletData$ | async)?.balance?.usd}}
+                </span>
+              </div>
+            </div>
+            <div class="field col-12">
+              <label class="block text-900  font-medium mb-2">Name</label>
+              <input pInputText class="w-full" formControlName="name"/>
+            </div>
+            <div class="field col-12">
+              <label class="block text-900  font-medium mb-2">Description</label>
+              <textarea rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
+            </div>
+            <div class="field col-12">
+              <label class="block text-900  font-medium mb-2">Video Link</label>
+              <input pInputText class="w-full" formControlName="embeddedUrl"/>
+            </div>
+            <div class="field col-12 align-items-center flex">
+              <p-inputSwitch class="pr-3"
+                             inputId="videoRepeat"
+                             formControlName="repeatVideo"></p-inputSwitch>
+              <label for="videoRepeat">Automatically repeat video</label>
+            </div>
+            <div class="field col-12 align-items-center flex">
+              <p-inputSwitch class="pr-3" inputId="videoTransparent"></p-inputSwitch>
+              <label for="videoTransparent">Transparent video</label>
+            </div>
+            <div class="field col-12 align-items-center flex">
+              <p-inputSwitch class="pr-3" inputId="videoCrop" formControlName="cropVideoByFrame"></p-inputSwitch>
+              <label for="videoCrop">Crop video</label>
+            </div>
+          </div>
+          <div class="col-12 md:col-6 flex align-items-start mt-5 justify-content-center">
+            <app-memo-cube [upperImage]="qrUrl"
+                           [rightImage]="photoUrl"
+                           [leftImage]="videoUrl"></app-memo-cube>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="field col-12">
+              <label class="block text-900 font-medium mb-2">Chromakey color</label>
+              <input pInputText class="w-full" formControlName="chromakeyColor"/>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="field col-12">
+              <label class="block text-900 font-medium mb-2">Blend Mode</label>
+              <p-dropdown optionLabel="label"
+                          optionValue="value"
+                          formControlName="fitMode"
+                          [options]="fitModes"></p-dropdown>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="field col-12">
+              <label class="block text-900 font-medium mb-2"
+                     for="video">Add video</label>
+              <div class="p-inputgroup">
+                <input
+                  id="video"
+                  pInputText
+                  type="text"
+                  placeholder="Choose a file"
+                  readonly
+                  [value]="selectedVideo?.name"
+                />
+                <span class="p-inputgroup-addon">
+                  <p-fileUpload
+                    name="video"
+                    accept="video/mp4,video/webm,video/ogg"
+                    [maxFileSize]="10000000"
+                    [auto]="true"
+                    mode="basic"
+                    chooseLabel="Browse"
+                    [customUpload]="true"
+                    (uploadHandler)="onVideoUpload($event)"
+                    (onUpload)="onVideoUpload($event)"></p-fileUpload>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="field col-12">
+              <label class="block text-900 font-medium mb-2"
+                     for="photo">Photo marker</label>
+              <div class="p-inputgroup">
+                <input
+                  id="photo"
+                  pInputText
+                  type="text"
+                  placeholder="Choose a file"
+                  readonly
+                  [value]="selectedPhoto?.name"
+                />
+                <span class="p-inputgroup-addon">
+                  <p-fileUpload
+                    name="file"
+                    accept="image/*"
+                    [maxFileSize]="1000000"
+                    [customUpload]="true"
+                    (uploadHandler)="onPhotoUpload($event)"
+                    [auto]="true"
+                    mode="basic"
+                    chooseLabel="Browse"></p-fileUpload>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 pl-5 pr-5">
+            <google-map
+              [center]="{ lat: memoForm.get('lat')?.value || 50.4501, lng: memoForm.get('lon')?.value || 30.5234 }"
+              [zoom]="10"
+              [options]="{ mapTypeId: 'roadmap', disableDefaultUI: true }"
+              [height]="432"
+              width="100%"
+              (mapClick)="onMapClick($event)"
+            >
+              <map-marker
+                [icon]="'/assets/layout/images/bxs-map.svg'"
+                [clickable]="true"
+                [options]="markerOptions"
+                (draggableChanged)="onPositionChanged($event)"
+                [position]="{ lat: memoForm.get('lat')?.value, lng: memoForm.get('lon')?.value }"
+              ></map-marker>
+            </google-map>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="col-12">
+              <label class="block text-900 font-medium mb-2">Latitude</label>
+              <input pInputText class="w-full" formControlName="lat" [readOnly]="true"/>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="col-12">
+              <label class="block text-900 font-medium mb-2">Longitude</label>
+              <input pInputText class="w-full" formControlName="lon" [readOnly]="true"/>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="col-12">
+              <label class="block text-900 font-medium mb-2">Password</label>
+              <p-password [toggleMask]="true"
+                          [feedback]="false"
+                          formControlName="password"></p-password>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="col-12 flex align-items-center">
+              <p-button label="Save digital tag"
+                      [disabled]="!memoForm.valid"
+                      [loading]="isSubmitting"
+                      (onClick)="onSubmit()">
+            </p-button>
+              <div class="ml-3">
+                <span>Creation price: GBM / USD</span>
+                <span class="c-price-holder font-bold ml-2">
+                  {{ price.gbm }} / {{ price.usd }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="field col-12">
+              <label class="block text-900 font-medium mb-2">Choose marketplace</label>
+              <p-dropdown optionLabel="label"
+                          optionValue="value"
+                          [disabled]="true"
+                          [options]="marketPlaces">
+              </p-dropdown>
+            </div>
+            <div class="field col-12 flex align-items-center">
+              <p-button label="Create NFT"
+                        (onClick)="mintNFT()"
+                        [loading]="isMinting"
+                        [disabled]="!memoId">
+              </p-button>
+              <div class="ml-3">
+                <span>Creation price: OKX / USD</span>
+                <span class="c-price-holder font-bold ml-2">
+                  {{ 0.1 }} / {{ 4.2 }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="progress-spinner"
+     *ngIf="isSubmitting">
+  <p-progressSpinner></p-progressSpinner>
+</div>

@@ -1,0 +1,12 @@
+:host {
+  .c-place-card {
+    background-color: var(--surface-ground);
+  }
+  .c-image-holder {
+    border-radius: .25rem;
+    height: 11rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

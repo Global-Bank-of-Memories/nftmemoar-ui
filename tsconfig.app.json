@@ -3,12 +3,18 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "esModuleInterop": true
   },
   "files": [
-    "src/main.ts"
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/window-global-fix.ts"
   ],
   "include": [
     "src/**/*.d.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "enableIvy": true
+  }
 }

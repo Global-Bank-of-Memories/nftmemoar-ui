@@ -1,0 +1,22 @@
+:host {
+  .c-link-back {
+
+  }
+  .c-price-holder {
+    background-color: var(--surface-100);
+    padding: 4px;
+  }
+  ::ng-deep {
+    .p-fileupload-button.p-button {
+      background-color: transparent;
+      border: none;
+      color: black;
+      padding: 0;
+    }
+
+    .p-fileupload-button.p-button:hover {
+      background-color: transparent;
+      border: none;
+    }
+  }
+}

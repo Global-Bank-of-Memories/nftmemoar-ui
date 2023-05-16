@@ -1,0 +1,19 @@
+<div class="cube">
+  <div class="face face__top"
+       [style.background-image]="'url(' + upperImage + ')'"></div>
+  <div class="face face__left"
+       [style.background-image]="'url(' + leftImage + ')'">
+    <video *ngIf="leftImage"
+           class="c-video-holder"
+           width="200px"
+           height="200px"
+           controls>
+      <source [src]="leftImage">
+    </video>
+  </div>
+  <div class="face face__front"
+       [style.background-image]="'url(' + rightImage + ')'"></div>
+</div>
+<div class="c-shadow-floating">
+</div>
+<div class="c-shadow-raised"></div>

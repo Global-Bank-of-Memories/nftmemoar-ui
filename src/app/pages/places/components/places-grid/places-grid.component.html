@@ -1,0 +1,48 @@
+<div class="p-grid p-nogutter grid">
+  <div *ngFor="let place of places" class="col-12 md:col-3">
+    <div class="card p-2 c-place-card">
+      <div class="c-image-holder" [style.background-image]="'url(' + place.photo_url + ')'">
+      </div>
+      <div class="p-text-secondary font-bold mt-3 mb-1 text-xs">
+        NAME
+      </div>
+      <div class="text-sm">
+        {{ place.name }}
+      </div>
+      <div class="p-text-secondary font-bold mt-3 mb-1 text-xs">
+        CREATED BY
+      </div>
+      <div class="text-sm">
+        {{ place.createdBy }}
+      </div>
+      <div class="p-text-secondary font-bold mt-3 mb-1 text-xs">
+        PLACE ID
+      </div>
+      <div class="text-sm">
+        {{ place.public_id }}
+      </div>
+      <div class="p-text-secondary font-bold mt-3 mb-1 text-xs">
+        DATE CREATED
+      </div>
+      <div class="text-sm">
+        {{ place.createdDate }}
+      </div>
+      <div class="flex justify-content-between mt-4">
+        <p-button styleClass="p-button-danger p-button-text"
+                  label="Delete"
+                  (onClick)="onDelete(place.public_id)">
+        </p-button>
+        <div>
+          <p-button class="mr-2"
+                    styleClass="p-button-outlined p-button-secondary"
+                    label="Edit"
+                    (onClick)="onEdit(place.public_id)">
+          </p-button>
+          <p-button label="Details"
+                    (onClick)="onView(place.public_id)">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

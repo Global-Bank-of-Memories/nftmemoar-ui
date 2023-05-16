@@ -1,0 +1,56 @@
+<div *ngIf="place">
+  <div class="c-cube-holder mb-4">
+    <app-memo-cube [upperImage]="place.qr_url"
+                   [leftImage]="place.video_url"
+                   [rightImage]="place.photo_url">
+    </app-memo-cube>
+  </div>
+  <div class="">
+    <h4>Description</h4>
+    <div class="mb-4">
+      {{place.description}}
+    </div>
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="font-bold">Created By</span>
+      <span>{{place.createdBy}}</span>
+    </div>
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="font-bold">Place id</span>
+      <span>{{place.public_id}}</span>
+    </div>
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="font-bold">Date created</span>
+      <span>{{place.createdDate}}</span>
+    </div>
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="font-bold col-4 p-0">Video link</span>
+      <a class="text-overflow-ellipsis overflow-hidden white-space-nowrap"
+         [href]="place.video_url"
+         target="_blank">
+        {{place.video_url}}
+      </a>
+    </div>
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="font-bold">NFT marketplace</span>
+      <span>OKX</span>
+    </div>
+  </div>
+  <google-map
+    [zoom]="15"
+    [center]="markerPosition"
+    [options]="{ mapTypeId: 'roadmap', disableDefaultUI: true }"
+    [height]="310"
+    width="100%"
+  >
+    <map-marker
+      [icon]="'/assets/layout/images/bxs-map.svg'"
+      [position]="markerPosition"
+    ></map-marker>
+  </google-map>
+  <div class="col-12 p-0 mt-4">
+    <p-button styleClass="w-full"
+              label="OK"
+              (onClick)="ref.close()">
+    </p-button>
+  </div>
+</div>

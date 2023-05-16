@@ -1,0 +1,9 @@
+:host {
+  .c-login-container {
+    width: 25rem;
+    border-radius: 0.5rem;
+  }
+  .c-main-container {
+    min-height: calc(100vh - 11.25rem);
+  }
+}
