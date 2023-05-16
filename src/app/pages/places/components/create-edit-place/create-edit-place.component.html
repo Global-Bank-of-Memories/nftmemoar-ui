@@ -200,7 +200,7 @@
               <p-button label="Create NFT"
                         (onClick)="mintNFT()"
                         [loading]="isMinting"
-                        [disabled]="!memoId">
+                        [disabled]="!memoId || isNftMinted">
               </p-button>
               <div class="ml-3">
                 <span>Creation price: OKX / USD</span>

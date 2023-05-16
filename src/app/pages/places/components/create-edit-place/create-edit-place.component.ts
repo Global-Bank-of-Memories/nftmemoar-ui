@@ -19,6 +19,7 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
   titleCreate: string = 'Create Place';
   titleEdit: string = 'Edit Place';
   editMode: boolean = false;
+  isNftMinted: boolean = false;
   memoForm!: FormGroup;
   photoUrl: string = '';
   videoUrl: string = '';
@@ -108,7 +109,7 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
       )
       .subscribe((res: any) => {
         const memo = res.data;
-        console.log(memo);
+        this.isNftMinted = memo.nft_minted;
         this.memoForm.patchValue({
           name: memo.name,
           description: memo.description,

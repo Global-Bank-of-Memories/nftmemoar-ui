@@ -53,7 +53,7 @@ export class NftService {
   }
 
   async mintNFT(data: INftDataPayload): Promise<any> {
-   const result: INftSignatureData = await lastValueFrom(this.getDataForNftMinting(data));
+    const result: INftSignatureData = await lastValueFrom(this.getDataForNftMinting(data));
     return await this.delegatedMint(result.signature, result.account, result.id, result.amount, result.data, data.public_id);
   }
 
@@ -70,6 +70,6 @@ export class NftService {
   }
 
   private setNft(data: ISetNftPayload): Observable<any> {
-    return this.http.post(`${this.apiUrl}/nft`, data);
+    return this.http.post(`${this.apiUrl}/nft-minted`, data);
   }
 }
