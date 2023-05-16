@@ -13,7 +13,7 @@ export class NftService {
   private web3: Web3;
   private contract: any;
   private account: string;
-  private contractAddress = '0xbA600A26e0abc12ab4636AE411fECbB76e1DEEb4';
+  private contractAddress = '0xc5b55EEf69Eb548E0b4cd5420fBca077E0ce1723';
   private apiUrl = environment.apiUrl;
 
   constructor(
