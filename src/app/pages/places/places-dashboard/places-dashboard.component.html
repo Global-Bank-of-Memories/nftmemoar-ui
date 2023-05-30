@@ -2,9 +2,9 @@
   <div class="col-12">
     <div class="card">
       <h4 class="text-center font-bold mb-6">Places</h4>
-      <div class="flex align-items-center justify-content-between mb-4">
-        <div>
-          <p-dropdown class="mr-3"
+      <div class="flex md:flex-row flex-column-reverse align-items-center justify-content-between mb-4">
+        <div class="mt-3 md:mt-0">
+          <p-dropdown class="mr-3 hidden md:inline"
                       [options]="entriesOptions"
                       (onChange)="onPageSizeChange($event.value)">
           </p-dropdown>
@@ -13,7 +13,7 @@
           <p-button label="Search" (onClick)="onSearch()">
           </p-button>
         </div>
-        <div class="flex align-items-center">
+        <div class="flex align-items-center justify-content-between w-100">
           <p-selectButton class="mr-2"
                           styleClass="text-sm"
                           [options]="viewModeOptions"

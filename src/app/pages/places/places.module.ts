@@ -23,6 +23,7 @@ import {BlockUIModule} from "primeng/blockui";
 import {PanelModule} from "primeng/panel";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {PasswordModule} from "primeng/password";
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {PasswordModule} from "primeng/password";
     PlacesGridComponent,
     CreateEditPlaceComponent,
     PlaceViewComponent,
-    MemoCubeComponent
+    MemoCubeComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     ReactiveFormsModule,

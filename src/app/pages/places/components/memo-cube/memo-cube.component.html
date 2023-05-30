@@ -3,7 +3,7 @@
        [style.background-image]="'url(' + upperImage + ')'"></div>
   <div class="face face__left"
        [style.background-image]="'url(' + leftImage + ')'">
-    <video *ngIf="leftImage"
+    <video [hidden]="!leftImage"
            class="c-video-holder"
            width="200px"
            height="200px"

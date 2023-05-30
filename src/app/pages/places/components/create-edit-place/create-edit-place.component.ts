@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PlacesService} from '../../../../core/services/places.service';
 import {WalletService} from '../../../../core/services/wallet.service';
@@ -9,6 +9,7 @@ import {switchMap, takeUntil} from 'rxjs';
 import {filter, tap} from 'rxjs/operators';
 import {NftService} from '../../../../core/services/nft.service';
 import {INftDataPayload} from '../../../../core/models/nft.model';
+import {FileUpload} from "primeng/fileupload";
 
 @Component({
   selector: 'app-create-edit-place',
@@ -85,8 +86,9 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
     id: 0,
     contractAddress: '',
   }
-
   account;
+  @ViewChild('videoFileUpload') videoFileUpload: FileUpload;
+  @ViewChild('imgFileUpload') imgFileUpload: FileUpload;
 
   constructor(
     public authService: AuthService,
@@ -106,7 +108,6 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
         filter(res => res && res.id),
         tap(res => {
           this.editMode = true;
-          this.connectWallet();
           this.memoId = res.id;
         }),
         switchMap(res => this.placesService.getPlaceDetails(res.id)),
@@ -135,9 +136,13 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
   }
 
   onVideoUpload(event: any) {
+    this.selectedVideo = null;
+    this.videoUrl = '';
     this.videoUrl = URL.createObjectURL(event.files[0]);
     this.selectedVideo = event.files[0];
+    console.log(this.videoUrl);
     this.getPrice();
+    this.videoFileUpload.clear();
     return true;
   }
 
@@ -145,6 +150,7 @@ export class CreateEditPlaceComponent extends Unsubscribable implements OnInit {
     this.photoUrl = event.files[0].objectURL.changingThisBreaksApplicationSecurity;
     this.selectedPhoto = event.files[0];
     this.getPrice();
+    this.imgFileUpload.clear();
   }
 
   onMapClick(event: any) {

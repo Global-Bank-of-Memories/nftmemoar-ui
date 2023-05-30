@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h4 class="mb-4">Delete "{{config.data.name}}"</h4>
+  <div class="mb-4">
+    Are your sure your want to delete "{{config.data.name}}"place from your list?
+  </div>
+  <div class="flex justify-content-center">
+    <p-button label="Back"
+              class="pr-3"
+              styleClass="p-button-outlined p-button-secondary"
+              (onClick)="ref.close()">
+    </p-button>
+    <p-button styleClass="p-button-danger"
+              label="Delete"
+              (onClick)="ref.close(true)">
+    </p-button>
+  </div>
+</div>

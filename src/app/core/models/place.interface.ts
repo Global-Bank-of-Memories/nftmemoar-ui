@@ -1,8 +1,11 @@
 export interface IPlace {
   public_id: string;
   name: string;
-  createdBy: string;
-  createdDate: string;
+  created_by: {
+    first_name: string;
+    last_name: string;
+  }
+  created_date: string;
   photo_url: string;
   description: string;
   video_url: string;

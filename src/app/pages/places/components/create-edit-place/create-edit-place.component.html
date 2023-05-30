@@ -9,7 +9,7 @@
         </div>
         <div>
           <p-button styleClass="p-button-rounded p-button-secondary p-button-text"
-                    label="Okx"
+                    [label]="account ? 'OKX' :'Connect Wallet'"
                     (onClick)="connectWallet()">
           </p-button>
         </div>
@@ -94,6 +94,7 @@
                 />
                 <span class="p-inputgroup-addon">
                   <p-fileUpload
+                    #videoFileUpload
                     name="video"
                     accept="video/mp4,video/webm,video/ogg"
                     [maxFileSize]="10000000"
@@ -122,6 +123,7 @@
                 />
                 <span class="p-inputgroup-addon">
                   <p-fileUpload
+                    #imgFileUpload
                     name="file"
                     accept="image/*"
                     [maxFileSize]="1000000"
@@ -136,9 +138,9 @@
           </div>
           <div class="col-12 pl-5 pr-5">
             <google-map
-              [center]="{ lat: memoForm.get('lat')?.value || 50.4501, lng: memoForm.get('lon')?.value || 30.5234 }"
+              [center]="{ lat: memoForm.get('lat')?.value, lng: memoForm.get('lon')?.value }"
               [zoom]="10"
-              [options]="{ mapTypeId: 'roadmap', disableDefaultUI: true }"
+              [options]="{ mapTypeId: 'roadmap' }"
               [height]="432"
               width="100%"
               (mapClick)="onMapClick($event)"
@@ -147,7 +149,7 @@
                 [icon]="'/assets/layout/images/bxs-map.svg'"
                 [clickable]="true"
                 [options]="markerOptions"
-                (draggableChanged)="onPositionChanged($event)"
+                (mapDragend)="onPositionChanged($event)"
                 [position]="{ lat: memoForm.get('lat')?.value, lng: memoForm.get('lon')?.value }"
               ></map-marker>
             </google-map>

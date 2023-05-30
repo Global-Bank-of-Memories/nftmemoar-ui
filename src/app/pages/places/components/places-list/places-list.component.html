@@ -17,9 +17,9 @@
   <ng-template pTemplate="body" let-place>
     <tr>
       <td>{{ place.name }}</td>
-      <td>{{ place.createdBy }}</td>
+      <td>{{ place.created_by?.first_name + ' ' + (place.created_by?.last_name ? place.created_by?.last_name : '') }}</td>
       <td>{{ place.public_id }}</td>
-      <td>{{ place.createdDate }}</td>
+      <td>{{ place.created_date | date:'M/d/y • h:mm a' }}</td>
       <td>
         <i class="pi pi-info-circle mr-3" (click)="onView(place.public_id)"></i>
         <i class="pi pi-pencil mr-3" (click)="onEdit(place.public_id)"></i>

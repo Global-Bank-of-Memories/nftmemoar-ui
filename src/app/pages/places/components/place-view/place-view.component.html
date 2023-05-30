@@ -12,7 +12,7 @@
     </div>
     <div class="flex justify-content-between align-items-center mb-4">
       <span class="font-bold">Created By</span>
-      <span>{{place.createdBy}}</span>
+      <span>{{place.created_by.first_name + ' ' + (place.created_by?.last_name ? place.created_by?.last_name : '')}}</span>
     </div>
     <div class="flex justify-content-between align-items-center mb-4">
       <span class="font-bold">Place id</span>
@@ -20,7 +20,7 @@
     </div>
     <div class="flex justify-content-between align-items-center mb-4">
       <span class="font-bold">Date created</span>
-      <span>{{place.createdDate}}</span>
+      <span>{{place.created_date | date:'M/d/y • h:mm a'}}</span>
     </div>
     <div class="flex justify-content-between align-items-center mb-4">
       <span class="font-bold col-4 p-0">Video link</span>
