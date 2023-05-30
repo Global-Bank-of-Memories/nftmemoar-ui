@@ -25,6 +25,11 @@ export class PlacesService {
       .pipe(catchError((err: HttpErrorResponse) => throwError(err)));
   }
 
+  deleteDigitalMemory(id: string) {
+    return this.http.delete(`${this.apiUrl}/memo/${id}`)
+      .pipe(catchError((err: HttpErrorResponse) => throwError(err)));
+  }
+
   editDigitalMemory(data: any) {
     return this.http.patch(`${this.apiUrl}/memo`, data)
       .pipe(catchError((err: HttpErrorResponse) => throwError(err)));

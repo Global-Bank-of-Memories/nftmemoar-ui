@@ -13,7 +13,7 @@
         CREATED BY
       </div>
       <div class="text-sm">
-        {{ place.createdBy }}
+        {{ place.created_by?.first_name + ' ' + (place.created_by?.last_name ? place.created_by?.last_name : '') }}
       </div>
       <div class="p-text-secondary font-bold mt-3 mb-1 text-xs">
         PLACE ID
@@ -25,7 +25,7 @@
         DATE CREATED
       </div>
       <div class="text-sm">
-        {{ place.createdDate }}
+        {{ place.created_date | date:'M/d/y • h:mm a' }}
       </div>
       <div class="flex justify-content-between mt-4">
         <p-button styleClass="p-button-danger p-button-text"

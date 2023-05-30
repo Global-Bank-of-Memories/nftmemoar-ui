@@ -7,16 +7,16 @@
     padding: 4px;
   }
   ::ng-deep {
-    .p-fileupload-button.p-button {
-      background-color: transparent;
-      border: none;
-      color: black;
-      padding: 0;
+    .p-fileupload .p-button {
+      border: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      padding: 13px;
     }
 
-    .p-fileupload-button.p-button:hover {
-      background-color: transparent;
-      border: none;
+    .p-inputgroup-addon {
+      padding: 0;
+      border: 0;
     }
   }
 }

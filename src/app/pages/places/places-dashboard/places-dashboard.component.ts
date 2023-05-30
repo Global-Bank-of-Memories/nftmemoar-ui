@@ -7,6 +7,8 @@ import { PlaceViewComponent } from '../components/place-view/place-view.componen
 import {BehaviorSubject, takeUntil} from "rxjs";
 import {IFilter} from "../../../core/models/filter.interface";
 import {Unsubscribable} from "../../../core/models/unsubscribable";
+import {DeleteConfirmationComponent} from "../components/delete-confirmation/delete-confirmation.component";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-places-dashboard',
@@ -64,6 +66,22 @@ export class PlacesDashboardComponent extends Unsubscribable implements OnInit {
   }
 
   onPlaceDelete(id: string) {
+    const memo = this.places.find((place) => place.public_id === id);
+    this.dialogRef = this.dialogService.open(DeleteConfirmationComponent, {
+      dismissableMask: true,
+      closeOnEscape: true,
+      data: memo,
+      styleClass: 'dialog-small'
+    });
+    this.dialogRef
+      .onClose
+      .pipe(
+        filter(res => !!res),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe(() => {
+        this.onDelete(id);
+      })
   }
 
   onPlaceCreate() {
@@ -99,5 +117,20 @@ export class PlacesDashboardComponent extends Unsubscribable implements OnInit {
       ...this.filterOptions.value,
       search: this.searchString
     });
+  }
+
+  onDelete(id: string) {
+    this.placesService.deleteDigitalMemory(id)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((res: any) => {
+        this.filterOptions.next({
+          ...this.filterOptions.value,
+          page: 1
+      });
+    });
+  }
+
+  private openDeleteConfirmationDialog(id: string) {
+
   }
 }
