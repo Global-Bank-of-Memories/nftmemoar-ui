@@ -1,6 +1,22 @@
-<div class="cube">
+<div class="c-back"
+     [hidden]="isAll">
+  <p-button icon="pi pi-arrow-left"
+            styleClass="p-button-rounded p-button-secondary p-button-text"
+            (onClick)="showAll()">
+  </p-button>
+</div>
+<div class="cube"
+     [@allSide]="cubeState">
   <div class="face face__top"
-       [style.background-image]="'url(' + upperImage + ')'"></div>
+       [style.background-image]="'url(' + upperImage + ')'"
+       (click)="showTop()">
+      <p-button class="c-download-button"
+                [hidden]="isAll"
+                icon="pi pi-download"
+                styleClass="p-button-rounded p-button-secondary p-button-raised"
+                (onClick)="downloadImage(upperImage)">
+      </p-button>
+  </div>
   <div class="face face__left"
        [style.background-image]="'url(' + leftImage + ')'">
     <video [hidden]="!leftImage"
@@ -12,7 +28,15 @@
     </video>
   </div>
   <div class="face face__front"
-       [style.background-image]="'url(' + rightImage + ')'"></div>
+       (click)="showFront()"
+       [style.background-image]="'url(' + rightImage + ')'">
+    <p-button class="c-download-button"
+              [hidden]="isAll"
+              icon="pi pi-download"
+              styleClass="p-button-rounded p-button-secondary p-button-raised"
+              (onClick)="downloadImage(rightImage)">
+    </p-button>
+  </div>
 </div>
 <div class="c-shadow-floating">
 </div>

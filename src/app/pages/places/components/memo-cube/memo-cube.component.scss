@@ -11,6 +11,16 @@ $blue3: #A9CCD1;
   .c-video-holder {
     transform: rotate(90deg);
   }
+  .c-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .c-download-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
 .cube {

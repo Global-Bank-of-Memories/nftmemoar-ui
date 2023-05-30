@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IPlace} from '../../../../core/models/place.interface';
-import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-place-view',
