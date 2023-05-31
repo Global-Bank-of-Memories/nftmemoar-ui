@@ -11,4 +11,5 @@ export interface IPlace {
   video_url: string;
   qr_url: string;
   coordinates: string;
+  embedded_url?: string;
 }
