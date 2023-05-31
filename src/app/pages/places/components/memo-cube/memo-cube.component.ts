@@ -23,7 +23,7 @@ import {HttpClient} from "@angular/common/http";
         transform: 'rotateX(240deg) rotateY(0deg) rotateZ(-130deg)'
       })),
       transition('all <=> *', [
-        animate('1000ms')
+        animate('1000ms ease')
       ]),
     ]),
   ],
@@ -45,6 +45,14 @@ export class MemoCubeComponent implements OnInit, OnChanges {
 
   get isAll(): boolean {
     return this.cubeState === 'all';
+  }
+
+  get isFront(): boolean {
+    return this.cubeState === 'front';
+  }
+
+  get isTop(): boolean {
+    return this.cubeState === 'top';
   }
 
   ngOnInit(): void {

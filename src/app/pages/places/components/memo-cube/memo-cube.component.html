@@ -11,7 +11,7 @@
        [style.background-image]="'url(' + upperImage + ')'"
        (click)="showTop()">
       <p-button class="c-download-button"
-                [hidden]="isAll"
+                [hidden]="!isTop"
                 icon="pi pi-download"
                 styleClass="p-button-rounded p-button-secondary p-button-raised"
                 (onClick)="downloadImage(upperImage)">
@@ -31,7 +31,7 @@
        (click)="showFront()"
        [style.background-image]="'url(' + rightImage + ')'">
     <p-button class="c-download-button"
-              [hidden]="isAll"
+              [hidden]="!isFront"
               icon="pi pi-download"
               styleClass="p-button-rounded p-button-secondary p-button-raised"
               (onClick)="downloadImage(rightImage)">
